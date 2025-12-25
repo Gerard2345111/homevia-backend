@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>EduSmart</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <h1>EduSmart 📘</h1>
+  <button onclick="toggleDark()">🌙</button>
+</header>
+
+<section class="card">
+  <h2>🧮 Math Solver</h2>
+  <input id="mathInput" placeholder="e.g. (5+3)*2">
+  <button onclick="solveMath()">Solve</button>
+  <p id="mathResult"></p>
+</section>
+
+<section class="card">
+  <h2>🏫 Smart School Helper</h2>
+  <input id="schoolInput" placeholder="Ask any school question">
+  <button onclick="schoolHelp()">Explain</button>
+  <p id="schoolResult"></p>
+</section>
+
+<section class="card">
+  <h2>📚 Subjects</h2>
+  <div class="grid">
+    <button onclick="lesson('math')">Math</button>
+    <button onclick="lesson('physics')">Physics</button>
+    <button onclick="lesson('chemistry')">Chemistry</button>
+    <button onclick="lesson('biology')">Biology</button>
+    <button onclick="lesson('english')">English</button>
+  </div>
+  <p id="lessonResult"></p>
+</section>
+
+<section class="card">
+  <h2>📝 Quiz</h2>
+  <p>What is 10 ÷ 2?</p>
+  <button onclick="quiz(5)">5</button>
+  <button onclick="quiz(4)">4</button>
+  <p id="quizResult"></p>
+</section>
+
+<section class="card">
+  <h2>📊 Your Progress</h2>
+  <p id="progress"></p>
+</section>
+
+<footer>
+  <p>EduSmart • Learn Smarter Every Day 🚀</p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
