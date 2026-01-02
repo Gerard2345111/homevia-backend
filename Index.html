@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Student Academic Report Card</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+:root {
+  --primary:#1f2a5a;
+  --dark:#0f1b3d;
+  --border:#e5e7eb;
+  --muted:#6b7280;
+  --green:#eaf7f2;
+  --red:#fdeeee;
+  --yellow:#fff6db;
+  --blue:#eef3ff;
+}
+
+* {
+  box-sizing:border-box;
+  font-family:"Segoe UI", Arial, sans-serif;
+}
+
+body {
+  background:#f2f4f8;
+  padding:30px;
+}
+
+.report {
+  max-width:1200px;
+  margin:auto;
+  background:white;
+  padding:30px;
+  border-radius:10px;
+}
+
+/* HEADER */
+.header {
+  display:grid;
+  grid-template-columns:90px 1fr auto;
+  align-items:center;
+  gap:15px;
+  border-bottom:3px solid var(--primary);
+  padding-bottom:15px;
+}
+
+.logo {
+  width:80px;
+  height:auto;
+}
+
+.header-center {
+  text-align:center;
+}
+
+.header h1 {
+  margin:0;
+  font-size:22px;
+  color:var(--primary);
+}
+
+.header h2 {
+  margin:6px 0;
+  font-size:16px;
+  font-weight:normal;
+}
+
+.header small {
+  color:var(--muted);
+}
+
+/* SECTIONS */
+.section {
+  margin-top:30px;
+}
+
+.section-title {
+  font-weight:600;
+  color:var(--primary);
+  margin-bottom:12px;
+}
+
+/* INFO */
+.info-grid {
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:15px 40px;
+}
+
+.info-item span {
+  font-size:13px;
+  color:var(--muted);
+}
+
+/* CARDS */
+.cards {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+  gap:15px;
+}
+
+.card {
+  border:1px solid var(--border);
+  border-radius:8px;
+  padding:18px;
+  text-align:center;
+}
+
+.card h3 {
+  margin:0;
+  color:var(--primary);
+}
+
+.green { background:var(--green); }
+.red { background:var(--red); }
+.yellow { background:var(--yellow); }
+.blue { background:var(--blue); }
+
+/* TABLE */
+table {
+  width:100%;
+  border-collapse:collapse;
+  font-size:14px;
+}
+
+th, td {
+  border:1px solid var(--border);
+  padding:8px;
+  text-align:center;
+}
+
+th {
+  background:var(--dark);
+  color:white;
+}
+
+td.subject {
+  text-align:left;
+  font-weight:500;
+}
+
+/* GRADES */
+.grade {
+  padding:4px 8px;
+  border-radius:5px;
+  font-weight:600;
+}
+
+.A1 { background:#e8f5e9; }
+.B2, .B3 { background:#e3f2fd; }
+.C4, .C6 { background:#fff8e1; }
+.D7, .E8 { background:#fdecea; }
+
+/* COMMENTS */
+.comment {
+  border:1px solid var(--border);
+  padding:15px;
+  border-radius:8px;
+  margin-top:10px;
+}
+
+/* SIGNATURE */
+.signature {
+  display:flex;
+  justify-content:space-between;
+  margin-top:40px;
+  color:var(--muted);
+}
+</style>
+</head>
+
+<body>
+
+<div class="report">
+
+<!-- HEADER -->
+<div class="header">
+  <img src="Upss.jpg" alt="School Logo" class="logo">
+  <div class="header-center">
+    <h1>UNIVERSITY PREPARATORY SECONDARY SCHOOL</h1>
+    <h2>Student Academic Report Card</h2>
+    <small>Term: First Term | Session: 2025/2026 | Class: SS 2 Mercury</small>
+  </div>
+  <small>Issued: 22 Dec 2025</small>
+</div>
+
+<!-- STUDENT INFORMATION -->
+<div class="section">
+  <div class="section-title">STUDENT INFORMATION</div>
+  <div class="info-grid">
+    <div class="info-item"><span>Full Name</span><br>Gerard Ifechukwu Chukwuemeka</div>
+    <div class="info-item"><span>Admission No.</span><br>UPSS/25/0924</div>
+    <div class="info-item"><span>Class</span><br>SS 2 Mercury</div>
+    <div class="info-item"><span>Arm</span><br>Mercury</div>
+    <div class="info-item"><span>Level</span><br>SS 2</div>
+    <div class="info-item"><span>Position in Class</span><br>1st of 30</div>
+  </div>
+</div>
+
+<!-- PERFORMANCE SUMMARY -->
+<div class="section">
+  <div class="section-title">OVERALL PERFORMANCE SUMMARY</div>
+  <div class="cards">
+    <div class="card"><h3>92.9%</h3>Average Score</div>
+    <div class="card"><h3>1300</h3>Total Points</div>
+    <div class="card"><h3>14</h3>Subjects</div>
+    <div class="card"><h3>Biology</h3>Best Subject</div>
+    <div class="card"><h3>1st / 162</h3>Position in Level</div>
+  </div>
+</div>
+
+<!-- ATTENDANCE -->
+<div class="section">
+  <div class="section-title">ATTENDANCE RECORD</div>
+  <div class="cards">
+    <div class="card green"><h3>57</h3>Present</div>
+    <div class="card red"><h3>1</h3>Absent</div>
+    <div class="card yellow"><h3>0</h3>Late</div>
+    <div class="card blue"><h3>0</h3>Excused</div>
+    <div class="card red"><h3>1</h3>Unexcused</div>
+    <div class="card"><h3>58</h3>Total Days</div>
+    <div class="card blue"><h3>98.3%</h3>Attendance Rate</div>
+  </div>
+</div>
+
+<!-- SUBJECT PERFORMANCE -->
+<div class="section">
+<div class="section-title">SUBJECT PERFORMANCE</div>
+
+<table>
+<tr>
+<th>Subject</th><th>Score</th><th>Grade</th><th>Position</th><th>Remark</th>
+</tr>
+
+<tr><td class="subject">Mathematics</td><td>96</td><td><span class="grade A1">A1</span></td><td>1</td><td>Dinstinction</td></tr>
+<tr><td class="subject">Biology</td><td>99</td><td><span class="grade A1">A1</span></td><td>1</td><td>Dinstinction</td></tr>
+<tr><td class="subject">photography</td><td>94</td><td><span class="grade A1">A1</span></td><td>1</td><td>Dinstinction</td></tr>
+<tr><td class="subject">Chemistry</td><td>89</td><td><span class="grade A1">A1</span></td><td>1</td><td>Dinstinction</td></tr>
+<tr><td class="subject">Civic Education</td><td>90</td><td><span class="grade A1">A1</span></td><td>1</td><td>Dinstinction</td></tr>
+<tr><td class="subject">Critical Thinking</td><td>91</td><td><span class="grade A1">A1</span></td><td>1</td><td>Dinstinction</td></tr>
+<tr><td class="subject">English Language</td><td>80</td><td><span class="grade B2">B2</span></td><td>1</td><td>High Credit</td></tr>
+<tr><td class="subject">Essentials in Writing</td><td>79</td><td><span class="grade B3">B3</span></td><td>1</td><td>Weak Credit</td></tr>
+<tr><td class="subject">ICT</td><td>92</td><td><span class="grade A1">A1</span></td><td>1</td><td>Distinction</td></tr>
+<tr><td class="subject">Oral English</td><td>89</td><td><span class="grade A1">A1</span></td><td>1</td><td>Distinction</td></tr>
+<tr><td class="subject">Physics</td><td>79</td><td><span class="grade B2">B2</span></td><td>1</td><td>Very Strong Credit</td></tr>
+<tr><td class="subject">Project</td><td>81</td><td><span class="grade A1">A1</span></td><td>1</td><td>Distinction</td></tr>
+<tr><td class="subject">Technical drawing</td><td>75</td><td><span class="grade B2">B2</span></td><td>2</td><td>Very Strong Credit</td></tr>
+<tr><td class="subject">further Maths</td><td>82</td><td><span class="grade A1">A1</span></td><td>3</td><td>Distinction</td></tr>
+</table>
+</div>
+
+<!-- TEACHER COMMENTS -->
+<div class="section">
+<div class="section-title">TEACHER COMMENTS</div>
+
+<div class="comment">
+<strong>MISS ADA AMOJOR'S REMARK</strong><br><br>
+Chukwuemeka has made satisfactory progress this term. With more consistent effort,
+he can remain the best
+</div>
+
+<div class="comment">
+<strong>MR. SERIKI DAVID'S REMARK</strong><br><br>
+I acknowledge Gerard satisfactory progress and encourage her to remain
+consistent. With sustained effort and focus he will remain the best
+</div>
+</div>
+
+<!-- SIGNATURE -->
+<div class="signature">
+  <div>
+    MISS ADA AMOJOR<br>
+    Class Teacher
+  </div>
+  <div>
+    MR. SERIKI DAVID<br>
+    Director
+  </div>
+</div>
+
+</div>
+</body>
+</html>
