@@ -13,8 +13,7 @@
 
 <style>
 body{margin:0;font-family:system-ui;background:#f8fafc}
-header{background:#0f172a;color:#fff;padding:1rem;display:flex;justify-content:space-between}
-nav button{background:none;border:none;color:#fff;margin-left:10px;font-weight:600}
+header{background:#0f172a;color:#fff;padding:1rem}
 .card{background:#fff;padding:1.5rem;border-radius:14px;margin-bottom:1rem;box-shadow:0 10px 30px rgba(0,0,0,.08)}
 main{max-width:1100px;margin:auto;padding:1rem}
 input,select,button{width:100%;padding:12px;margin-top:8px;border-radius:10px;border:1px solid #ddd}
@@ -30,31 +29,27 @@ button{background:#22c55e;color:#fff;border:none;font-weight:600}
 
 <header>
   <h2>🏠 Homevia</h2>
-  <nav>
-    <button onclick="show('home')">Home</button>
-    <button onclick="show('post')">Post</button>
-    <button onclick="show('auth')">Login / Signup</button>
-  </nav>
 </header>
 
 <main>
 
-<!-- AUTH -->
-<div id="auth" class="card">
-  <h3>Login</h3>
-  <input id="loginEmail" placeholder="Email">
-  <input id="loginPassword" type="password" placeholder="Password">
-  <button onclick="login()">Login</button>
-
-  <hr>
-
+<!-- SIGN UP (DEFAULT VIEW) -->
+<div id="signupBox" class="card">
   <h3>Create Account</h3>
   <input id="name" placeholder="Full Name">
   <input id="email" placeholder="Email">
   <input id="password" type="password" placeholder="Password">
   <button onclick="signup()">Sign Up</button>
+  <p id="signupMsg"></p>
+</div>
 
-  <p id="msg" style="color:red"></p>
+<!-- LOGIN (HIDDEN INITIALLY) -->
+<div id="loginBox" class="card hidden">
+  <h3>Login</h3>
+  <input id="loginEmail" placeholder="Email">
+  <input id="loginPassword" type="password" placeholder="Password">
+  <button onclick="login()">Login</button>
+  <p id="loginMsg"></p>
 </div>
 
 <!-- HOME -->
@@ -86,18 +81,12 @@ button{background:#22c55e;color:#fff;border:none;font-weight:600}
 </main>
 
 <script>
-/* ================= CONFIG ================= */
 const API = "https://homevia-backend.onrender.com/api";
 let map, markers=[];
 
-/* ================= ROUTER ================= */
-function show(id){
-  document.querySelectorAll("main > div").forEach(d=>d.classList.add("hidden"));
-  document.getElementById(id).classList.remove("hidden");
-}
-
 /* ================= SIGN UP ================= */
 async function signup(){
+  signupMsg.textContent = "Creating account...";
   const res = await fetch(`${API}/auth/register`,{
     method:"POST",
     headers:{ "Content-Type":"application/json" },
@@ -109,11 +98,21 @@ async function signup(){
   });
 
   const data = await res.json();
-  msg.textContent = data.message || "Account created. Login now.";
+  if(!res.ok){
+    signupMsg.textContent = data.message;
+    return;
+  }
+
+  signupMsg.style.color="green";
+  signupMsg.textContent = "Account created! Please login.";
+
+  document.getElementById("signupBox").classList.add("hidden");
+  document.getElementById("loginBox").classList.remove("hidden");
 }
 
 /* ================= LOGIN ================= */
 async function login(){
+  loginMsg.textContent="Logging in...";
   const res = await fetch(`${API}/auth/login`,{
     method:"POST",
     headers:{ "Content-Type":"application/json" },
@@ -124,10 +123,14 @@ async function login(){
   });
 
   const data = await res.json();
-  if(!res.ok){ msg.textContent=data.message; return; }
+  if(!res.ok){
+    loginMsg.textContent=data.message;
+    return;
+  }
 
   localStorage.token = data.token;
-  show("home");
+  document.getElementById("loginBox").classList.add("hidden");
+  document.getElementById("home").classList.remove("hidden");
   loadListings();
 }
 
@@ -163,12 +166,8 @@ async function loadListings(){
         ${l.premium?'<span class="badge">Premium</span>':''}
         <p>${l.location}</p>
         <b>₦${l.price}</b>
-        ${!l.premium?`<button onclick="pay('${l._id}')">Upgrade</button>`:''}
       </div>
     `;
-    if(l.lat&&l.lng){
-      markers.push(new google.maps.Marker({position:{lat:l.lat,lng:l.lng},map}));
-    }
   });
 }
 
@@ -188,34 +187,8 @@ async function postListing(){
     })
   });
   alert("Posted");
-  show("home");
   loadListings();
 }
-
-/* ================= PAYSTACK ================= */
-function pay(id){
-  PaystackPop.setup({
-    key:"pk_test_31a195aae362634a327a24039fdbe82742aa7a23",
-    email:"user@homevia.com",
-    amount:300000,
-    currency:"NGN",
-    callback:r=>verifyPayment(r.reference,id)
-  }).openIframe();
-}
-
-async function verifyPayment(ref,id){
-  await fetch(`${API}/listings/verify-payment`,{
-    method:"POST",
-    headers:{
-      "Content-Type":"application/json",
-      "Authorization":"Bearer "+localStorage.token
-    },
-    body:JSON.stringify({reference:ref,listing_id:id})
-  });
-  loadListings();
-}
-
-loadListings();
 </script>
 
 </body>
